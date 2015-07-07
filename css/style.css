@@ -1,0 +1,2686 @@
+/*                                                                                                                                         
+                                                ,,            ,,                          ,,                                             
+ .M"""bgd mm                                    db          `7MM        mm         mm   `7MM                                    OO OO OO 
+,MI    "Y MM                                                  MM        MM         MM     MM                                    88 88 88 
+`MMb.   mmMMmm ,pW"Wq.`7MMpdMAo.     `7Mb,od8 `7MM  .P"Ybmmm  MMpMMMb.mmMMmm     mmMMmm   MMpMMMb.  .gP"Ya `7Mb,od8 .gP"Ya      || || || 
+  `YMMNq. MM  6W'   `Wb MM   `Wb       MM' "'   MM :MI  I8    MM    MM  MM         MM     MM    MM ,M'   Yb  MM' "',M'   Yb     || || || 
+.     `MM MM  8M     M8 MM    M8       MM       MM  WmmmP"    MM    MM  MM         MM     MM    MM 8M""""""  MM    8M""""""     `' `' `' 
+Mb     dM MM  YA.   ,A9 MM   ,AP       MM       MM 8M         MM    MM  MM         MM     MM    MM YM.    ,  MM    YM.    ,     ,, ,, ,, 
+P"Ybmmd"  `Mbmo`Ybmd9'  MMbmmd'      .JMML.   .JMML.YMMMMMb .JMML  JMML.`Mbmo      `Mbmo.JMML  JMML.`Mbmmd'.JMML.   `Mbmmd'     db db db 
+                        MM                         6'     dP                                                                             
+                      .JMML.                       Ybmmmd'                                                                               
+
+Pattern Lab doesn't have any CSS requirements, which means you can write your styles however you want. Hooray!
+You can use Sass, Less, vanilla CSS, or some other crazy thing I haven't heard of yet.
+So please don't use these styles. They're just here to put together the demo, and nothing more.
+They're intentionally gray, boring, and crappy because you're supposed to do this stuff yourself.
+
+Atomic design is philosophically complimentary with these CSS approaches:
+
+* SMACSS by Jonathan Snook http://smacss.com/
+* OOCSS by Nicole Sullivan http://oocss.org/
+* BEM CSS Methology : http://bem.info/method/
+* CSS Guidelines by Harry Roberts : https://github.com/csswizardry/CSS-Guidelines
+
+So feel free to use any of these approaches. Or don't. It's totally up to you.
+
+*/
+/*------------------------------------*\
+    $TABLE OF CONTENTS 
+    based generally on Harry Roberts excellent CSS Guidelines https://github.com/csswizardry/CSS-Guidelines
+\*------------------------------------*/
+/**
+ * VARIABLES..............................Declarations of Sass variables 
+ * .....Colors
+ * .....Typography
+ * .....Layout
+ * .....Defaults
+ * .....Breakpoints
+ * MIXINS.................................Sass mixins 
+ * RESET..................................Set reset defaults
+ * GLOBAL CLASSES.........................Set reset defaults
+ * GLOBAL ELEMENTS........................Establish global styles
+ * .....Main
+ * .....Headings
+ * .....Text-related elements (p, blockquote, lists)
+ * .....Defaults
+ * .....Breakpoints
+ * TYPOGRAPHY------------------------------
+ * MEDIA------------------------------
+ * LAYOUT------------------------------
+ * NAVIGATION------------------------------
+ * TOC To Be Continued
+ */
+/*------------------------------------*\
+    $VARIABLES
+\*------------------------------------*/
+/*------------------------------------*\
+    $MIXINS
+\*------------------------------------*/
+/* CSS Transition
+	Usage: @include transition(width,0.3s,ease-out);
+ */
+/* Rem Unit font sizes with relative fallback http:/seesparkbox.com/foundry/scss_rem_mixin_now_with_a_better_fallback  
+	Usage: @include font-size(1, large);
+*/
+/*------------------------------------*\
+    $RESET
+\*------------------------------------*/
+/* Border-Box http:/paulirish.com/2012/box-sizing-border-box-ftw/ */
+/* line 6, scss/generic/_reset.scss */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 11, scss/generic/_reset.scss */
+html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, ol, ul, li, form, legend, label, table, header, footer, nav, section, figure {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 15, scss/generic/_reset.scss */
+header, footer, nav, section, article, hgroup, figure {
+  display: block;
+}
+
+/*------------------------------------*\
+    $GLOBAL ELEMENTS
+\*------------------------------------*/
+/*------------------------------------*\
+    $GLOBAL CLASSES
+\*------------------------------------*/
+/* Clearfix */
+/* line 6, scss/base/_global-classes.scss */
+.cf, .l-two-col, [role=main] {
+  *zoom: 1;
+}
+
+/* line 9, scss/base/_global-classes.scss */
+.cf:before, .l-two-col:before, [role=main]:before, .cf:after, .l-two-col:after, [role=main]:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+
+/* line 14, scss/base/_global-classes.scss */
+.cf:after, .l-two-col:after, [role=main]:after {
+  clear: both;
+}
+
+/* Completely remove from the flow and screen readers. */
+/* line 19, scss/base/_global-classes.scss */
+.is-hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Completely remove from the flow but leave available to screen readers. */
+/* line 25, scss/base/_global-classes.scss */
+.is-vishidden {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* Floats */
+/* line 36, scss/base/_global-classes.scss */
+.right {
+  float: right;
+  padding: 0 0 1em 1em;
+}
+
+/* line 41, scss/base/_global-classes.scss */
+.right-search {
+  float: right;
+  padding: 0 0 1em 0;
+}
+
+/* line 46, scss/base/_global-classes.scss */
+.left {
+  float: left;
+  padding: 0 1em 1em 0;
+}
+
+/* Text-Align */
+/* line 52, scss/base/_global-classes.scss */
+.align-right {
+  text-align: right;
+}
+
+/* line 56, scss/base/_global-classes.scss */
+.align-center {
+  text-align: center;
+}
+
+/* line 60, scss/base/_global-classes.scss */
+.align-left {
+  text-align: left;
+}
+
+@media all and (min-width: 48em) {
+  /* line 64, scss/base/_global-classes.scss */
+  .no-padtop {
+    padding-top: 0;
+  }
+}
+
+/* Display Classes */
+@media all and (max-width: 46.8em) {
+  /* line 71, scss/base/_global-classes.scss */
+  .hide-small {
+    display: none;
+  }
+}
+
+@media all and (min-width: 46.8em) and (max-width: 50em) {
+  /* line 77, scss/base/_global-classes.scss */
+  .hide-med {
+    display: none;
+  }
+}
+
+@media all and (min-width: 50em) {
+  /* line 83, scss/base/_global-classes.scss */
+  .hide-large {
+    display: none;
+  }
+}
+
+/* line 90, scss/base/_global-classes.scss */
+.valid {
+  color: #089e00;
+}
+
+/* line 94, scss/base/_global-classes.scss */
+.error {
+  color: red;
+}
+
+/* line 98, scss/base/_global-classes.scss */
+.warning {
+  color: #fff664;
+}
+
+/* line 102, scss/base/_global-classes.scss */
+.information {
+  color: #000db5;
+}
+
+/* line 106, scss/base/_global-classes.scss */
+.font-secondary {
+  font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+/* line 1, scss/base/_main.scss */
+body {
+  background: #262626;
+  font: 100%/1.5 "Lato", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+  -webkit-text-size-adjust: 100%;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Links */
+/* line 2, scss/base/_links.scss */
+a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  outline: 0;
+}
+/* line 7, scss/base/_links.scss */
+a:hover, a:focus {
+  color: #f9f9f9;
+}
+
+/* Headings */
+/*Further Reading: http:/csswizardry.com/2012/02/pragmatic-practical-font-sizing-in-css/ */
+/* line 3, scss/base/_headings.scss */
+h1, .alpha {
+  line-height: 1.2;
+  font-size: 3.2em;
+  font-weight: 700;
+}
+
+/* line 9, scss/base/_headings.scss */
+h2, .beta {
+  text-align: center;
+  line-height: 1.2;
+  font-size: 3.2em;
+  font-weight: 100;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+/* line 18, scss/base/_headings.scss */
+.thicker h2 {
+  font-weight: 300;
+}
+
+/* line 22, scss/base/_headings.scss */
+h3, .gamma {
+  font-size: 1.3em;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 1px;
+  padding-bottom: 0.25em;
+}
+
+/* Subheadings */
+/* line 43, scss/base/_headings.scss */
+.subheading {
+  font-family: Georgia, Times, "Times New Roman", serif;
+  font-weight: normal;
+}
+
+/* Text-Related Elements */
+/* line 2, scss/base/_text.scss */
+p {
+  margin-bottom: 1em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Blockquote */
+/* line 8, scss/base/_text.scss */
+blockquote {
+  font-style: italic;
+  border-left: 1px solid gray;
+  color: rgba(255, 255, 255, 0.8);
+  padding-left: 1em;
+  margin-bottom: 1em;
+}
+
+/* Horizontal Rule */
+/* line 17, scss/base/_text.scss */
+hr {
+  border: 0;
+  height: 2px;
+  background: #eeeeee;
+  margin: 2em 0;
+}
+
+/* line 24, scss/base/_text.scss */
+abbr {
+  border-bottom: 1px dotted gray;
+  cursor: help;
+}
+
+/* line 1, scss/base/_lists.scss */
+ol, ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Definition Lists */
+/* line 8, scss/base/_lists.scss */
+dl {
+  overflow: hidden;
+  margin: 0 0 1em;
+}
+
+/* line 13, scss/base/_lists.scss */
+dt {
+  font-weight: bold;
+}
+
+/* line 17, scss/base/_lists.scss */
+dd {
+  margin-left: 0;
+}
+
+/*------------------------------------*\
+    $MEDIA ELEMENTS
+\*------------------------------------*/
+/* Flexible Media */
+/* line 6, scss/base/_media.scss */
+img, video, object {
+  max-width: 100%;
+  height: auto;
+}
+
+/* line 12, scss/base/_media.scss */
+iframe {
+  margin-bottom: 1em;
+}
+
+/* line 16, scss/base/_media.scss */
+figure {
+  margin-bottom: 1em;
+}
+/* line 18, scss/base/_media.scss */
+figure img {
+  margin-bottom: 0.5em;
+}
+
+/* line 22, scss/base/_media.scss */
+figcaption {
+  font-style: italic;
+}
+
+/* line 26, scss/base/_media.scss */
+svg {
+  width: 100%;
+}
+
+/*------------------------------------*\
+    $FORMS
+\*------------------------------------*/
+/* line 4, scss/base/_forms.scss */
+form ol, form ul {
+  list-style: none;
+  margin-left: 0;
+}
+
+/* line 9, scss/base/_forms.scss */
+fieldset {
+  border: 0;
+  padding: 0;
+}
+
+/* line 13, scss/base/_forms.scss */
+label {
+  display: block;
+  padding-bottom: 0.5em;
+}
+
+/* line 18, scss/base/_forms.scss */
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 1.4375em;
+  margin: 0 auto;
+}
+
+/* line 24, scss/base/_forms.scss */
+input, textarea {
+  border: 1px solid gray;
+  padding: 0.5em 2em;
+  margin: 0 auto 1em auto;
+  border-radius: 0.25em;
+  background: rgba(255, 255, 255, 0.8);
+}
+@media all and (max-width: 767px) {
+  /* line 24, scss/base/_forms.scss */
+  input, textarea {
+    width: 100%;
+    max-width: 349px;
+  }
+}
+
+/* line 37, scss/base/_forms.scss */
+input[type=text], input[type=search], input[type=url], input[type=number], input[type=email], textarea {
+  -webkit-appearance: none;
+  -webkit-transition: all 0.20s ease-in-out;
+  -moz-transition: all 0.20s ease-in-out;
+  -ms-transition: all 0.20s ease-in-out;
+  -o-transition: all 0.20s ease-in-out;
+}
+
+/* line 46, scss/base/_forms.scss */
+input[type=text]:focus, input[type=search]:focus, input[type=url]:focus, input[type=number]:focus, input[type=email]:focus, textarea:focus {
+  outline: 0;
+  box-shadow: 0 0 12px #13b2d4;
+}
+
+/* line 54, scss/base/_forms.scss */
+button, input[type="submit"] {
+  padding: 0.5em;
+  background: #ea2531;
+  border: 1px solid gray;
+  cursor: pointer;
+  -webkit-transition: all 0.20s ease-in-out;
+  -moz-transition: all 0.20s ease-in-out;
+  -ms-transition: all 0.20s ease-in-out;
+  -o-transition: all 0.20s ease-in-out;
+}
+
+/* line 66, scss/base/_forms.scss */
+input[type="checkbox"],
+input[type="radio"] {
+  width: auto;
+  margin-right: 0.3em;
+}
+
+/* line 72, scss/base/_forms.scss */
+input[type="search"] {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+/* line 77, scss/base/_forms.scss */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/* line 83, scss/base/_forms.scss */
+.field-container {
+  margin-bottom: 1em;
+}
+
+/* line 88, scss/base/_forms.scss */
+.inline-form fieldset, .inline-form .inline-container {
+  position: relative;
+}
+/* line 92, scss/base/_forms.scss */
+.inline-form input[type=submit], .inline-form button, .inline-form .btn {
+  font-size: 1.4375em;
+  padding: 0.67em 1em;
+  margin: 0 0.5em;
+  background: #ea2531;
+  position: relative;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: auto;
+}
+/* line 103, scss/base/_forms.scss */
+.inline-form input[type=submit]:hover, .inline-form input[type=submit]:focus, .inline-form button:hover, .inline-form button:focus, .inline-form .btn:hover, .inline-form .btn:focus {
+  background: #13b2d4;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Validation */
+/* line 111, scss/base/_forms.scss */
+.has-error {
+  border-color: red;
+}
+
+/* line 114, scss/base/_forms.scss */
+.is-valid {
+  border-color: #089e00;
+}
+
+/*------------------------------------*\
+    $SPECIFIC FORMS
+\*------------------------------------*/
+/* Search Form */
+/* line 126, scss/base/_forms.scss */
+.search-field {
+  padding-right: 3em;
+}
+
+/* line 129, scss/base/_forms.scss */
+.inline-form .search-submit {
+  background: none;
+  padding: 0.78em 1em;
+  border: 0;
+  border-left: 1px solid gray;
+  color: gray;
+}
+
+/*------------------------------------*\
+    $Table
+\*------------------------------------*/
+/* line 4, scss/base/_tables.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid gray;
+  width: 100%;
+}
+
+/* line 10, scss/base/_tables.scss */
+th {
+  text-align: left;
+  border: 1px solid gray;
+  padding: 0.2em;
+}
+
+/* line 15, scss/base/_tables.scss */
+td {
+  border: 1px solid gray;
+  padding: 0.2em;
+}
+
+/* line 1, scss/base/_animation.scss */
+.animate-fade {
+  -webkit-transition: opacity 0.3s ease-out;
+  -moz-transition: opacity 0.3s ease-out;
+  -ms-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+}
+/* line 4, scss/base/_animation.scss */
+.animate-fade:hover {
+  opacity: 0;
+}
+
+/* line 10, scss/base/_animation.scss */
+.animate-move > .demo-shape {
+  -webkit-transition: all 0.8s ease-in-out;
+  -moz-transition: all 0.8s ease-in-out;
+  -ms-transition: all 0.8s ease-in-out;
+  -o-transition: all 0.8s ease-in-out;
+  transition: all 0.8s ease-in-out;
+}
+
+/*------------------------------------*\
+    $LAYOUT
+\*------------------------------------*/
+/*------------------------------------*\
+    $LAYOUT
+\*------------------------------------*/
+/* Layout Container */
+/* line 5, scss/objects/_layout.scss */
+.lc, .header, [role=main] {
+  max-width: 100%;
+  margin: 0 auto;
+  /*	padding: $pad-half;*/
+}
+
+/*------------------------------------*\
+    $TEMPLATES
+\*------------------------------------*/
+/* Two Column Layout */
+@media all and (min-width: 50em) {
+  /* line 19, scss/objects/_layout.scss */
+  .l-two-col .l-main {
+    float: left;
+    width: 70%;
+    padding-right: 1em;
+  }
+}
+@media all and (max-width: 50em) {
+  /* line 27, scss/objects/_layout.scss */
+  .l-two-col .l-sidebar {
+    clear: both;
+  }
+}
+@media all and (min-width: 50em) {
+  /* line 27, scss/objects/_layout.scss */
+  .l-two-col .l-sidebar {
+    float: left;
+    width: 30%;
+    padding: 0 0 0 1em;
+  }
+}
+
+/*------------------------------------*\
+    $FLEX
+\*------------------------------------*/
+/* Grid Container */
+/* line 46, scss/objects/_layout.scss */
+.flex-container {
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
+  display: flex;
+  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  /* Then we define the flow direction and if we allow the items to wrap 
+  * Remember this is the same as:
+  * flex-direction: row;
+  * flex-wrap: wrap;
+  */
+  -webkit-box-flex: 1;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: 1;
+  /* OLD - Firefox 19- */
+  -webkit-flex: 1;
+  /* Chrome */
+  -ms-flex: 1;
+  /* IE 10 */
+  flex: 1;
+  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  flex-direction: row;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  padding: 2em;
+  max-width: 78em;
+  margin-left: auto;
+  margin-right: auto;
+  /* Then we define how is distributed the remaining space */
+  justify-content: space-around;
+}
+/* line 77, scss/objects/_layout.scss */
+.flex-container.ui {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  /* Then we define how is distributed the remaining space */
+  justify-content: space-around;
+}
+
+/* line 89, scss/objects/_layout.scss */
+.stats-bar > .flex-container {
+  max-width: 50em;
+}
+
+/* line 94, scss/objects/_layout.scss */
+.flex-item {
+  padding: 1em;
+  width: 360px;
+  margin: 0 auto 2em auto;
+  text-align: center;
+  /*
+  *********************************************
+  Specific declarations for stats section
+  *********************************************
+  */
+  /*
+  *********************************************
+  Specific declarations for screenshot/about section
+  *********************************************
+  */
+}
+@media all and (max-width: 50em) {
+  /* line 101, scss/objects/_layout.scss */
+  .flex-item svg {
+    height: 50%;
+  }
+}
+/* line 112, scss/objects/_layout.scss */
+.flex-item.stats-box {
+  padding: 1em;
+  width: 330px;
+}
+@media all and (max-width: 50em) {
+  /* line 112, scss/objects/_layout.scss */
+  .flex-item.stats-box {
+    margin-bottom: 2em;
+  }
+}
+/* line 121, scss/objects/_layout.scss */
+.flex-item.github-box {
+  padding: 0;
+  font-size: 1.0625em;
+  font-weight: 400;
+  letter-spacing: .03em;
+  color: #fff;
+  text-align: left;
+  width: 330px;
+}
+/* line 135, scss/objects/_layout.scss */
+.flex-item.ui-box {
+  text-align: left;
+  width: 50%;
+  margin: 0;
+  padding: 0;
+}
+@media all and (max-width: 48em) {
+  /* line 135, scss/objects/_layout.scss */
+  .flex-item.ui-box {
+    width: auto;
+  }
+}
+/* line 144, scss/objects/_layout.scss */
+.flex-item.ui-box .ui-label {
+  font-size: 1em;
+}
+/* line 146, scss/objects/_layout.scss */
+.flex-item.ui-box .ui-label p {
+  padding-bottom: 1em;
+  line-height: 1.3em;
+  text-rendering: optimizeLegibility;
+}
+/* line 152, scss/objects/_layout.scss */
+.flex-item.ui-box .browser {
+  position: relative;
+  left: 30px;
+  width: 120%;
+}
+@media all and (max-width: 48em) {
+  /* line 152, scss/objects/_layout.scss */
+  .flex-item.ui-box .browser {
+    position: relative;
+    left: 0px;
+    width: 100%;
+  }
+}
+
+/*-------------------------------------------------*\
+    TRENT KILLED $BIOS STYLES WAS SAME AS FLEX-CONTAINER
+\*-------------------------------------------------*/
+/*------------------------------------*\
+    $GRIDS
+\*------------------------------------*/
+/* Grid Container */
+/* line 176, scss/objects/_layout.scss */
+.g {
+  overflow: hidden;
+  margin: 0 -0.5em;
+}
+
+/* Grid Item */
+/* line 182, scss/objects/_layout.scss */
+.gi {
+  padding: 0.5em;
+}
+/* line 185, scss/objects/_layout.scss */
+.gi img {
+  display: block;
+}
+@media all and (min-width: 46.8em) {
+  /* line 182, scss/objects/_layout.scss */
+  .gi {
+    float: left;
+  }
+}
+
+/* Grid 1up */
+/* line 196, scss/objects/_layout.scss */
+.g-1up .gi {
+  width: 100%;
+}
+
+/* Grid 2up */
+@media all and (min-width: 46.8em) {
+  /* line 204, scss/objects/_layout.scss */
+  .g-2up > .gi {
+    float: left;
+    width: 50%;
+  }
+  /* line 208, scss/objects/_layout.scss */
+  .g-2up > .gi:nth-of-type(odd) {
+    clear: left;
+  }
+}
+
+/* Grid Half (Always displayed side by side) */
+/* line 217, scss/objects/_layout.scss */
+.g-half > .gi {
+  float: left;
+  width: 50%;
+}
+/* line 221, scss/objects/_layout.scss */
+.g-half > .gi:nth-of-type(odd) {
+  clear: left;
+}
+
+/* Grid 3up */
+@media all and (min-width: 46.8em) {
+  /* line 230, scss/objects/_layout.scss */
+  .g-3up > .gi {
+    float: left;
+    width: 50%;
+  }
+  /* line 234, scss/objects/_layout.scss */
+  .g-3up > .gi:nth-of-type(2n+1) {
+    clear: left;
+  }
+}
+@media all and (min-width: 50em) {
+  /* line 241, scss/objects/_layout.scss */
+  .g-3up > .gi {
+    width: 33.3333333%;
+  }
+  /* line 244, scss/objects/_layout.scss */
+  .g-3up > .gi:nth-of-type(2n+1) {
+    clear: none;
+  }
+  /* line 248, scss/objects/_layout.scss */
+  .g-3up > .gi:nth-of-type(3n+1) {
+    clear: left;
+  }
+}
+
+/* Grid 4up */
+@media all and (min-width: 46.8em) {
+  /* line 258, scss/objects/_layout.scss */
+  .g-4up > .gi {
+    float: left;
+    width: 50%;
+  }
+  /* line 262, scss/objects/_layout.scss */
+  .g-4up > .gi:nth-of-type(2n+1) {
+    clear: both;
+  }
+}
+@media all and (min-width: 50em) {
+  /* line 269, scss/objects/_layout.scss */
+  .g-4up > .gi {
+    width: 25%;
+  }
+  /* line 272, scss/objects/_layout.scss */
+  .g-4up > .gi:nth-of-type(2n+1) {
+    clear: none;
+  }
+  /* line 276, scss/objects/_layout.scss */
+  .g-4up > .gi:nth-of-type(4n+1) {
+    clear: left;
+  }
+}
+
+/* Grid Quarter (Always displayed side by side) */
+/* line 285, scss/objects/_layout.scss */
+.g-quarter > .gi {
+  float: left;
+  width: 24%;
+}
+/* line 289, scss/objects/_layout.scss */
+.g-quarter > .gi:nth-of-type(4n+1) {
+  clear: left;
+}
+
+@media all and (min-width: 29.75em) {
+  /* line 298, scss/objects/_layout.scss */
+  .g-max4 > .gi {
+    float: left;
+    width: 50%;
+  }
+  /* line 302, scss/objects/_layout.scss */
+  .g-max4 > .gi:nth-of-type(2n+1) {
+    clear: both;
+  }
+}
+@media all and (min-width: 39.8em) {
+  /* line 309, scss/objects/_layout.scss */
+  .g-max4 > .gi {
+    width: 33.3333333%;
+  }
+  /* line 312, scss/objects/_layout.scss */
+  .g-max4 > .gi:nth-of-type(2n+1) {
+    clear: none;
+  }
+  /* line 316, scss/objects/_layout.scss */
+  .g-max4 > .gi:nth-of-type(3n+1) {
+    clear: left;
+  }
+}
+@media all and (min-width: 50em) {
+  /* line 323, scss/objects/_layout.scss */
+  .g-max4 > .gi {
+    width: 25%;
+  }
+  /* line 326, scss/objects/_layout.scss */
+  .g-max4 > .gi:nth-of-type(3n+1) {
+    clear: none;
+  }
+  /* line 330, scss/objects/_layout.scss */
+  .g-max4 > .gi:nth-of-type(4n+1) {
+    clear: left;
+  }
+}
+
+/* Grid 5up */
+/* line 340, scss/objects/_layout.scss */
+.g-max5 > .gi {
+  float: left;
+  width: 50%;
+}
+/* line 344, scss/objects/_layout.scss */
+.g-max5 > .gi:nth-of-type(2n+1) {
+  clear: both;
+}
+@media all and (min-width: 39.8em) {
+  /* line 350, scss/objects/_layout.scss */
+  .g-max5 > .gi {
+    width: 33.3333333%;
+  }
+  /* line 353, scss/objects/_layout.scss */
+  .g-max5 > .gi:nth-of-type(2n+1) {
+    clear: none;
+  }
+  /* line 357, scss/objects/_layout.scss */
+  .g-max5 > .gi:nth-of-type(3n+1) {
+    clear: left;
+  }
+}
+@media all and (min-width: 46.8em) {
+  /* line 364, scss/objects/_layout.scss */
+  .g-max5 > .gi {
+    width: 25%;
+  }
+  /* line 367, scss/objects/_layout.scss */
+  .g-max5 > .gi:nth-of-type(3n+1) {
+    clear: none;
+  }
+  /* line 371, scss/objects/_layout.scss */
+  .g-max5 > .gi:nth-of-type(4n+1) {
+    clear: left;
+  }
+}
+@media all and (min-width: 48em) {
+  /* line 378, scss/objects/_layout.scss */
+  .g-max5 > .gi {
+    width: 20%;
+  }
+  /* line 381, scss/objects/_layout.scss */
+  .g-max5 > .gi:nth-of-type(4n+1) {
+    clear: none;
+  }
+  /* line 385, scss/objects/_layout.scss */
+  .g-max5 > .gi:nth-of-type(5n+1) {
+    clear: left;
+  }
+}
+
+/* Grid 2/3 */
+@media all and (min-width: 46.8em) {
+  /* line 393, scss/objects/_layout.scss */
+  .gi-2-3 {
+    float: left;
+    width: 66.666666%;
+  }
+}
+
+@media all and (min-width: 46.8em) {
+  /* line 400, scss/objects/_layout.scss */
+  .gi-1-3 {
+    float: left;
+    width: 33.333333%;
+  }
+}
+
+/* Grid 4up block */
+/* line 409, scss/objects/_layout.scss */
+.g-opposites .gi {
+  float: left;
+}
+/* line 412, scss/objects/_layout.scss */
+.g-opposites .gi:last-child {
+  float: right;
+  text-align: right;
+}
+
+/*------------------------------------*\
+    $PAGE STRUCTURE
+\*------------------------------------*/
+/* line 1, scss/objects/_header.scss */
+.header {
+  /*	padding: 15px 2% 0 2%;
+  */
+  background-color: #353535;
+}
+
+/* line 7, scss/objects/_header.scss */
+.logo {
+  float: left;
+  max-width: 6rem;
+  /*	margin: 0.4rem;
+  */
+  margin: 20px 30px;
+}
+@media all and (min-width: 46.8em) {
+  /* line 7, scss/objects/_header.scss */
+  .logo {
+    max-width: 9rem;
+  }
+}
+
+/* line 18, scss/objects/_header.scss */
+.nav-toggle {
+  float: right;
+  display: block;
+  /*	padding: 0.9rem 1rem 0.7rem;
+  
+  */
+  padding: 1.3rem;
+  font-size: 1.3rem;
+  line-height: 1;
+  border-left: 1px solid #dbdbdb;
+}
+@media all and (min-width: 46.8em) {
+  /* line 18, scss/objects/_header.scss */
+  .nav-toggle {
+    display: none;
+  }
+}
+@media all and (max-width: 17em) {
+  /* line 18, scss/objects/_header.scss */
+  .nav-toggle {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+  }
+}
+
+/* line 38, scss/objects/_header.scss */
+.search-form {
+  overflow: hidden;
+  max-height: 0;
+}
+@media all and (min-width: 46.8em) {
+  /* line 38, scss/objects/_header.scss */
+  .search-form {
+    float: right;
+    max-height: none;
+    margin: 0.65em 0.5em 0 0;
+  }
+}
+
+/*------------------------------------*\
+    $NAVIGATION
+\*------------------------------------*/
+/* line 5, scss/objects/_nav.scss */
+.nav {
+  clear: both;
+  overflow: hidden;
+  max-height: 0;
+}
+/* line 11, scss/objects/_nav.scss */
+.nav--social {
+  min-width: 25px;
+  max-width: 25px;
+}
+/* line 16, scss/objects/_nav.scss */
+.nav a {
+  display: block;
+  padding: 1em 0.5em;
+  border-top: 1px solid #eeeeee;
+  color: rgba(255, 255, 255, 0.8);
+}
+/* line 23, scss/objects/_nav.scss */
+.nav.active {
+  max-height: 40em;
+}
+/* line 27, scss/objects/_nav.scss */
+.nav .head-icons {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+@media all and (min-width: 46.8em) {
+  /* line 5, scss/objects/_nav.scss */
+  .nav {
+    max-height: none;
+    float: right;
+    clear: none;
+    height: 71px;
+    padding-right: 5px;
+  }
+  /* line 38, scss/objects/_nav.scss */
+  .nav li {
+    float: left;
+    margin: 10px 0;
+  }
+  /* line 42, scss/objects/_nav.scss */
+  .nav li.blog {
+    padding-right: 20px;
+  }
+  /* line 45, scss/objects/_nav.scss */
+  .nav a {
+    border: 0;
+  }
+  /* line 49, scss/objects/_nav.scss */
+  .nav .blog a {
+    margin: 9px 0;
+    padding: 5px 15px;
+    height: 36px;
+    background-color: #13b2d4;
+    border-radius: 5px;
+    -webkit-transition: all 0.20s ease-in-out;
+  }
+  /* line 58, scss/objects/_nav.scss */
+  .nav .blog a:hover {
+    background-color: gray;
+  }
+}
+
+/* line 66, scss/objects/_nav.scss */
+.pagination {
+  overflow: hidden;
+}
+/* line 69, scss/objects/_nav.scss */
+.pagination li {
+  float: left;
+  border-right: 1px solid #eeeeee;
+}
+/* line 73, scss/objects/_nav.scss */
+.pagination li:last-child {
+  border: 0;
+}
+/* line 78, scss/objects/_nav.scss */
+.pagination a {
+  padding: 1em;
+}
+
+/*------------------------------------*\
+    $MAIN CONTENT AREA
+\*------------------------------------*/
+/* line 4, scss/objects/_main.scss */
+[role=main] {
+  /*	padding: $pad-half $pad-half $pad-double;*/
+  overflow: hidden;
+}
+
+/*------------------------------------*\
+    $FOOTER
+\*------------------------------------*/
+/* line 4, scss/objects/_footer.scss */
+.footer {
+  clear: both;
+  overflow: hidden;
+  background: #131313;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.2;
+  /*	padding: 0 0 0 0;
+  
+      display: block;
+  
+  	margin-left: auto;
+  	margin-right: auto;
+  */
+}
+/* line 19, scss/objects/_footer.scss */
+.footer a {
+  color: #13b2d4;
+}
+/* line 23, scss/objects/_footer.scss */
+.footer--cta {
+  display: inline-block;
+  width: 30%;
+  margin-left: 10%;
+  box-sizing: border-box;
+  padding: 2em 4em 0 4em;
+  text-align: left;
+}
+@media all and (max-width: 66em) {
+  /* line 23, scss/objects/_footer.scss */
+  .footer--cta {
+    width: 100%;
+    padding: 1em 4em 4em 0;
+  }
+}
+/* line 38, scss/objects/_footer.scss */
+.footer--contact-block {
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
+  display: flex;
+  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 5px;
+  width: 300px;
+}
+/* line 53, scss/objects/_footer.scss */
+.footer--contact-block .pin {
+  order: 1;
+  margin-right: 25px;
+}
+/* line 57, scss/objects/_footer.scss */
+.footer--contact-block .address {
+  width: 350px;
+  order: 2;
+}
+/* line 61, scss/objects/_footer.scss */
+.footer--contact-block .social {
+  order: 3;
+}
+/* line 66, scss/objects/_footer.scss */
+.footer .foot-icons {
+  width: 35px;
+  height: 35px;
+  display: block;
+  margin-bottom: 15px;
+}
+/* line 70, scss/objects/_footer.scss */
+.footer--contact {
+  text-align: left;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  min-width: 300px;
+}
+@media all and (max-width: 66em) {
+  /* line 70, scss/objects/_footer.scss */
+  .footer--contact {
+    padding: 0.5em 0;
+    text-align: left;
+  }
+}
+/* line 84, scss/objects/_footer.scss */
+.footer--map-pin {
+  display: inline-block;
+  position: relative;
+  float: left;
+  width: 25px;
+  min-width: 25px;
+}
+/* line 92, scss/objects/_footer.scss */
+.footer--social {
+  display: inline-block;
+  position: relative;
+  float: right;
+  min-width: 35px;
+  max-width: 35px;
+  margin-bottom: 15px;
+}
+/* line 101, scss/objects/_footer.scss */
+.footer--map {
+  width: 50%;
+  float: right;
+  background: #262626;
+}
+@media all and (min-width: 50em) {
+  /* line 101, scss/objects/_footer.scss */
+  .footer--map {
+    margin-bottom: -180px;
+  }
+}
+/* line 114, scss/objects/_footer.scss */
+.footer--map:after {
+  clear: both;
+}
+/* line 121, scss/objects/_footer.scss */
+.map--svg {
+  display: block;
+  top: 0;
+  left: 0;
+}
+@media all and (max-width: 66em) {
+  /* line 101, scss/objects/_footer.scss */
+  .footer--map {
+    width: 100%;
+  }
+}
+/* line 134, scss/objects/_footer.scss */
+.footer--copyright {
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 4em 0;
+  background: #262626;
+}
+/* line 142, scss/objects/_footer.scss */
+.footer--copyright p {
+  color: gray;
+}
+
+/* line 150, scss/objects/_footer.scss */
+.nav-footer {
+  margin: -1em -1em 1em;
+}
+/* line 153, scss/objects/_footer.scss */
+.nav-footer li {
+  border-bottom: 1px solid #262626;
+}
+@media all and (min-width: 46.8em) {
+  /* line 153, scss/objects/_footer.scss */
+  .nav-footer li {
+    border: 0;
+    float: left;
+  }
+}
+/* line 162, scss/objects/_footer.scss */
+.nav-footer a {
+  display: block;
+  padding: 1em;
+}
+
+@media all and (min-width: 46.8em) {
+  /* line 168, scss/objects/_footer.scss */
+  .copyright {
+    float: right;
+  }
+}
+
+/*------------------------------------*\
+    $TEXT Styles
+\*------------------------------------*/
+/* line 2, scss/objects/_text.scss */
+.intro {
+  font-size: 1.0625em;
+  padding: 0 5% 0 5%;
+  max-width: 70em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 11, scss/objects/_text.scss */
+.callout-text {
+  font-size: 1em;
+  line-height: 1.4;
+  text-rendering: optimizeLegibility;
+}
+
+/* line 18, scss/objects/_text.scss */
+.pullquote {
+  font-family: Georgia, Times, "Times New Roman", serif;
+  font-size: 1.4375em;
+}
+
+/* line 24, scss/objects/_text.scss */
+.caption {
+  font-style: italic;
+}
+
+/* line 30, scss/objects/_text.scss */
+.text a {
+  text-decoration: underline;
+}
+/* line 34, scss/objects/_text.scss */
+.text ul {
+  list-style: disc;
+  margin: 0 0 1em 1.2em;
+}
+/* line 38, scss/objects/_text.scss */
+.text ul ul {
+  margin-bottom: 0;
+}
+/* line 43, scss/objects/_text.scss */
+.text ol {
+  list-style: decimal;
+  margin: 0 0 1em 1.5em;
+}
+/* line 47, scss/objects/_text.scss */
+.text ol ol {
+  margin-bottom: 0;
+}
+
+/*------------------------------------*\
+    $COMPONENTS
+\*------------------------------------*/
+/* Icon Font */
+@font-face {
+  font-family: 'icons';
+  src: url("../fonts/icons.eot");
+  src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"), url("../fonts/icons.woff") format("woff"), url("../fonts/icons.ttf") format("truetype"), url("../fonts/icons.svg#icons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+/* line 15, scss/objects/_icons.scss */
+[data-icon]:before {
+  font-family: 'icons';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 24, scss/objects/_icons.scss */
+.icon-twitter:before, .icon-stumbleupon:before, .icon-pinterest:before, .icon-linkedin:before, .icon-google-plus:before, .icon-search:before, .icon-play:before, .icon-menu:before, .icon-arrow-left:before, .icon-arrow-right:before, .icon-bubble:before, .icon-facebook:before, .icon-feed:before, .icon-youtube:before, .icon-tag:before, .icon-tumblr:before, .icon-instagram, .icon-podcast, .icon-apple, .icon-android, .icon-arrow:after, .icon-envelope:before {
+  font-family: 'icons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 34, scss/objects/_icons.scss */
+.icon-twitter:before {
+  content: "\74";
+}
+
+/* line 37, scss/objects/_icons.scss */
+.icon-stumbleupon:before {
+  content: "\75";
+}
+
+/* line 40, scss/objects/_icons.scss */
+.icon-pinterest:before {
+  content: "\70";
+}
+
+/* line 43, scss/objects/_icons.scss */
+.icon-linkedin:before {
+  content: "\69";
+}
+
+/* line 46, scss/objects/_icons.scss */
+.icon-google-plus:before {
+  content: "\67";
+}
+
+/* line 49, scss/objects/_icons.scss */
+.icon-search:before {
+  content: "\73";
+}
+
+/* line 52, scss/objects/_icons.scss */
+.icon-play:before {
+  content: "\61";
+}
+
+/* line 55, scss/objects/_icons.scss */
+.icon-menu:before {
+  content: "\21";
+}
+
+/* line 58, scss/objects/_icons.scss */
+.icon-arrow-left:before {
+  content: "\23";
+}
+
+/* line 61, scss/objects/_icons.scss */
+.icon-arrow-right:before {
+  content: "\24";
+}
+
+/* line 64, scss/objects/_icons.scss */
+.icon-bubble:before {
+  content: "\25";
+}
+
+/* line 67, scss/objects/_icons.scss */
+.icon-facebook:before {
+  content: "\66";
+}
+
+/* line 70, scss/objects/_icons.scss */
+.icon-feed:before {
+  content: "\27";
+}
+
+/* line 73, scss/objects/_icons.scss */
+.icon-youtube:before {
+  content: "\79";
+}
+
+/* line 76, scss/objects/_icons.scss */
+.icon-tag:before {
+  content: "\28";
+}
+
+/* line 79, scss/objects/_icons.scss */
+.icon-tumblr:before {
+  content: "\6d";
+}
+
+/* line 82, scss/objects/_icons.scss */
+.icon-instagram:before {
+  content: "\22";
+}
+
+/* line 85, scss/objects/_icons.scss */
+.icon-podcast:before {
+  content: "\26";
+}
+
+/* line 88, scss/objects/_icons.scss */
+.icon-android:before {
+  content: "\29";
+}
+
+/* line 91, scss/objects/_icons.scss */
+.icon-apple:before {
+  content: "\2a";
+}
+
+/* line 94, scss/objects/_icons.scss */
+.icon-envelope:before {
+  content: "\2b";
+}
+
+/* line 99, scss/objects/_icons.scss */
+.icon-arrow:after {
+  content: "\61";
+  display: inline-block;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+/* line 109, scss/objects/_icons.scss */
+.icon-play:before {
+  font-size: 0.7rem;
+  padding-left: 0.2em;
+}
+
+/* line 114, scss/objects/_icons.scss */
+.icon-play-box {
+  display: block;
+  margin-left: 2em;
+}
+
+/* line 119, scss/objects/_icons.scss */
+.icon-play-box:before {
+  padding: 0.25em;
+  background: gray;
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: -1.7rem;
+  margin-right: 0.5em;
+}
+
+/* line 127, scss/objects/_icons.scss */
+.team-icon {
+  width: 45px;
+  height: 45px;
+  display: inline-block;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+/*------------------------------------*\
+    $BUTTONS
+\*------------------------------------*/
+/* line 4, scss/objects/_buttons.scss */
+.btn {
+  display: inline-block;
+  background: #ea2531;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1;
+  padding: 1em;
+  border: 0;
+  border-radius: 0.25em;
+  text-align: center;
+  font-size: 1.4375em;
+}
+/* line 15, scss/objects/_buttons.scss */
+.btn:hover, .btn:focus {
+  background: gray;
+  color: rgba(255, 255, 255, 0.8);
+}
+/* line 20, scss/objects/_buttons.scss */
+.btn.disabled {
+  background: #eeeeee;
+  color: gray;
+}
+
+/* line 26, scss/objects/_buttons.scss */
+.btn-secondary {
+  display: inline-block;
+  background: #13b2d4;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1;
+  padding: 1em;
+  border: 0;
+  border-radius: 0.25em;
+  text-align: center;
+  font-size: 1.0625em;
+}
+/* line 37, scss/objects/_buttons.scss */
+.btn-secondary:hover, .btn-secondary:focus {
+  background: #2ecbec;
+  color: rgba(255, 255, 255, 0.8);
+}
+/* line 42, scss/objects/_buttons.scss */
+.btn-secondary.disabled {
+  background: #eeeeee;
+  color: gray;
+}
+
+/* line 50, scss/objects/_buttons.scss */
+.btn-small {
+  padding: 0.5em;
+}
+
+/* line 54, scss/objects/_buttons.scss */
+.btn-large {
+  padding: 0.5em;
+  text-transform: uppercase;
+  background: gray;
+  font-size: 1.4rem;
+  font-weight: normal;
+}
+
+/* line 63, scss/objects/_buttons.scss */
+.text-btn {
+  font-style: italic;
+}
+
+/* Generic Placeholder Brick: REMOVE FOR PRODUCTION */
+/* line 2, scss/objects/_blocks.scss */
+.brick {
+  background: #dcdddc;
+  padding: 2em;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid #eeeeee;
+}
+
+/* Block */
+/* line 12, scss/objects/_blocks.scss */
+.block {
+  overflow: hidden;
+}
+/* line 15, scss/objects/_blocks.scss */
+.block p:last-child {
+  margin-bottom: 0;
+}
+
+/* line 20, scss/objects/_blocks.scss */
+.headline {
+  line-height: 1.2;
+}
+
+/* line 24, scss/objects/_blocks.scss */
+.subheadline {
+  width: 50%;
+  font-weight: 300;
+  font-size: 2.0em;
+  line-height: 1.2;
+  margin: 0 auto;
+}
+
+/* Hero Block */
+/* line 33, scss/objects/_blocks.scss */
+.block-hero {
+  margin-bottom: 0.5em;
+}
+/* line 37, scss/objects/_blocks.scss */
+.block-hero .b-thumb img {
+  display: block;
+}
+@media all and (min-width: 50em) {
+  /* line 33, scss/objects/_blocks.scss */
+  .block-hero {
+    position: relative;
+  }
+  /* line 45, scss/objects/_blocks.scss */
+  .block-hero .b-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 1.5em;
+  }
+}
+
+/* Block Thumbnail with Headline */
+/* line 58, scss/objects/_blocks.scss */
+.block-thumb {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+/* line 63, scss/objects/_blocks.scss */
+.block-thumb .b-inner {
+  display: table-row;
+  vertical-align: top;
+  overflow: hidden;
+}
+@media all and (min-width: 29.75em) {
+  /* line 69, scss/objects/_blocks.scss */
+  .block-thumb .b-thumb {
+    display: table-cell;
+    vertical-align: top;
+    width: 30%;
+    max-width: 10em;
+  }
+  /* line 76, scss/objects/_blocks.scss */
+  .block-thumb .b-thumb img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+@media all and (min-width: 29.75em) {
+  /* line 84, scss/objects/_blocks.scss */
+  .block-thumb .b-text {
+    display: table-cell;
+    width: 70%;
+    padding: 0 1em;
+    font-size: 0.2em;
+  }
+}
+
+/* Block Headline Summary */
+/* line 97, scss/objects/_blocks.scss */
+.block-headline-summary a {
+  display: block;
+  padding: 0.5em;
+}
+
+/* Block Inset */
+/* line 104, scss/objects/_blocks.scss */
+.block-inset {
+  position: relative;
+  background: rgba(255, 255, 255, 0.8);
+  margin: 0 -500%;
+  padding: 0.5em 500%;
+  background: rgba(255, 0, 0, 0.5);
+}
+
+/* Hero Block */
+/* line 113, scss/objects/_blocks.scss */
+.block-inset {
+  margin-bottom: 0.5em;
+  position: relative;
+}
+/* line 117, scss/objects/_blocks.scss */
+.block-inset .headline {
+  font-size: 1.1em;
+}
+/* line 121, scss/objects/_blocks.scss */
+.block-inset .b-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.5em;
+}
+
+/* Block Thumb with Summary */
+/* line 134, scss/objects/_blocks.scss */
+.block-thumb-summary .b-thumb {
+  float: left;
+  width: 50%;
+}
+/* line 139, scss/objects/_blocks.scss */
+.block-thumb-summary .b-text {
+  margin-left: 50%;
+  padding: 0.5em;
+}
+
+/* Big Hero */
+/* line 146, scss/objects/_blocks.scss */
+.big-hero {
+  background-image: url("../images/templated_dashboard_graphite.png");
+  background-position: middle center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  padding: 12em 0 12em 0;
+}
+/* line 159, scss/objects/_blocks.scss */
+.big-hero .subtext {
+  font-weight: 100;
+  padding: 1em;
+  font-size: 1.4375em;
+}
+
+/* 
+*************************************
+large hero breakpoint 
+*************************************
+*/
+@media all and (min-width: 39.8em) {
+  /* Story Hero */
+  /* line 173, scss/objects/_blocks.scss */
+  .story-hero {
+    background-color: #262626;
+    background-image: url("../images/y-axis.gif");
+    background-position: bottom left;
+    background-repeat: repeat-y;
+    border-bottom: 3px solid #353535;
+    position: relative;
+    height: 600px;
+  }
+  /* line 182, scss/objects/_blocks.scss */
+  .story-hero .moore-graph {
+    width: calc(100% - 50px);
+    width: -webkit-calc(100% - 50px);
+    width: -moz-calc(100% - 50px);
+    height: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-image: url("../images/moore-graph.jpg");
+    background-position: bottom center;
+    background-repeat: no-repeat;
+  }
+
+  /* line 195, scss/objects/_blocks.scss */
+  .headline {
+    font-weight: 100;
+    font-size: 3.2em;
+    line-height: 0.9em;
+    margin-bottom: 20px;
+  }
+
+  /* line 202, scss/objects/_blocks.scss */
+  .thicker .headline {
+    font-weight: 300;
+    opacity: 0.9;
+  }
+
+  /* line 208, scss/objects/_blocks.scss */
+  .subtext {
+    font-weight: 100;
+    padding: 1em;
+    font-size: 1.4375em;
+  }
+
+  /* line 214, scss/objects/_blocks.scss */
+  .x-axis {
+    width: 100%;
+    height: 90px;
+    background-image: url("../images/x-axis.gif");
+    background-position: top center;
+    background-repeat: repeat-x;
+  }
+}
+/* 
+*************************************
+jumbo hero text
+*************************************
+*/
+@media all and (min-width: 73em) {
+  /* line 228, scss/objects/_blocks.scss */
+  .headblock1 {
+    width: 40%;
+    position: relative;
+    top: 35px;
+    left: 50px;
+  }
+
+  /* line 235, scss/objects/_blocks.scss */
+  .headblock2 {
+    float: right;
+    margin-right: 15px;
+    width: 40%;
+    position: relative;
+    color: #000;
+  }
+}
+/* 
+*************************************
+large hero text
+*************************************
+*/
+@media all and (min-width: 66em) and (max-width: 73em) {
+  /* line 250, scss/objects/_blocks.scss */
+  .headblock1 {
+    width: 40%;
+    position: relative;
+    top: 35px;
+    left: 50px;
+  }
+
+  /* line 257, scss/objects/_blocks.scss */
+  .headblock2 {
+    float: right;
+    margin-right: 15px;
+    width: 40%;
+    position: relative;
+    top: 20px;
+    color: #000;
+  }
+}
+/* 
+*************************************
+largish hero text
+*************************************
+*/
+@media all and (min-width: 50em) and (max-width: 66em) {
+  /* line 273, scss/objects/_blocks.scss */
+  .headline {
+    font-weight: 100;
+    font-size: 3.2em;
+    line-height: 0.9em;
+    margin-bottom: 20px;
+  }
+
+  /* line 281, scss/objects/_blocks.scss */
+  .thicker .headline {
+    font-weight: 300;
+    opacity: 0.9;
+  }
+
+  /* line 287, scss/objects/_blocks.scss */
+  .subtext {
+    font-weight: 100;
+    padding: 1em;
+    font-size: 1.4375em;
+  }
+
+  /* line 293, scss/objects/_blocks.scss */
+  .headblock1 {
+    width: 36%;
+    position: relative;
+    top: 35px;
+    left: 50px;
+  }
+
+  /* line 300, scss/objects/_blocks.scss */
+  .headblock2 {
+    float: right;
+    margin-right: 15px;
+    width: 40%;
+    position: relative;
+    top: -120px;
+    color: #000;
+  }
+
+  /* line 309, scss/objects/_blocks.scss */
+  .x-axis {
+    width: 100%;
+    height: 90px;
+    background-image: url("../images/x-axis.gif");
+    background-position: top center;
+    background-repeat: repeat-x;
+  }
+}
+/* 
+*************************************
+medium hero text
+*************************************
+*/
+@media all and (min-width: 48em) and (max-width: 50em) {
+  /* line 323, scss/objects/_blocks.scss */
+  .headline {
+    font-weight: 100;
+    font-size: 3.2em;
+    line-height: 0.9em;
+    margin-bottom: 20px;
+  }
+
+  /* line 330, scss/objects/_blocks.scss */
+  .thicker .headline {
+    font-weight: 300;
+    opacity: 0.9;
+  }
+
+  /* line 335, scss/objects/_blocks.scss */
+  .subtext {
+    font-weight: 100;
+    padding: 1em;
+    font-size: 1.4375em;
+  }
+
+  /* line 341, scss/objects/_blocks.scss */
+  .headblock1 {
+    width: 36%;
+    position: relative;
+    top: 35px;
+    left: 50px;
+  }
+
+  /* line 348, scss/objects/_blocks.scss */
+  .headblock2 {
+    float: right;
+    margin-right: 15px;
+    width: 40%;
+    position: relative;
+    top: -160px;
+    color: #000;
+  }
+
+  /* line 357, scss/objects/_blocks.scss */
+  .x-axis {
+    width: 100%;
+    height: 90px;
+    background-image: url("../images/x-axis.gif");
+    background-position: top center;
+    background-repeat: repeat-x;
+  }
+}
+/* 
+*************************************
+small hero breakpoint 
+*************************************
+*/
+@media all and (max-width: 767px) {
+  /* line 372, scss/objects/_blocks.scss */
+  .story-hero {
+    background: none;
+    background-color: #262626;
+    height: auto;
+  }
+  /* line 377, scss/objects/_blocks.scss */
+  .story-hero .moore-graph {
+    display: none;
+  }
+
+  /* line 381, scss/objects/_blocks.scss */
+  .headline {
+    font-weight: 100;
+    font-size: 3.2em;
+    line-height: 0.9em;
+    margin-bottom: 20px;
+  }
+
+  /* line 388, scss/objects/_blocks.scss */
+  .thicker .headline {
+    font-weight: 300;
+    opacity: 0.9;
+  }
+
+  /* line 393, scss/objects/_blocks.scss */
+  .subtext {
+    font-weight: 100;
+    padding: 1em;
+    font-size: 1.4375em;
+  }
+
+  /* line 399, scss/objects/_blocks.scss */
+  .headblock1 {
+    padding: 2em 50px 0;
+  }
+
+  /* line 403, scss/objects/_blocks.scss */
+  .headblock2 {
+    background-image: url("../images/moore-graph-small.jpg");
+    background-position: top;
+    background-repeat: no-repeat;
+    padding: 13em 4em 4em 4em;
+    margin: 0;
+    color: #000;
+  }
+
+  /* line 413, scss/objects/_blocks.scss */
+  .x-axis {
+    display: none;
+  }
+}
+/* line 418, scss/objects/_blocks.scss */
+.containMe {
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+/* line 425, scss/objects/_blocks.scss */
+.containMeSmall {
+  width: 100%;
+  max-width: 740px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+/* Callout Block */
+/* line 433, scss/objects/_blocks.scss */
+.callout .callout-thumb {
+  display: table-cell;
+  min-width: 125px;
+}
+@media all and (min-width: 29.75em) {
+  /* line 433, scss/objects/_blocks.scss */
+  .callout .callout-thumb {
+    vertical-align: top;
+    margin-bottom: 1em;
+  }
+}
+/* line 445, scss/objects/_blocks.scss */
+.callout .callout-textblock {
+  text-align: left;
+}
+@media all and (min-width: 29.75em) {
+  /* line 445, scss/objects/_blocks.scss */
+  .callout .callout-textblock {
+    display: table-cell;
+    width: 70%;
+    padding: 0 1em;
+    -size: 0.75em;
+  }
+}
+@media all and (max-width: 29.75em) {
+  /* line 445, scss/objects/_blocks.scss */
+  .callout .callout-textblock {
+    margin-top: 1em;
+  }
+}
+@media all and (max-width: 29.75em) {
+  /* line 445, scss/objects/_blocks.scss */
+  .callout .callout-textblock {
+    text-align: center;
+  }
+}
+
+@media (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* line 466, scss/objects/_blocks.scss */
+  .callout .callout-thumb {
+    max-width: 125px;
+  }
+}
+/* Bio Block */
+/* line 475, scss/objects/_blocks.scss */
+.bio .bio-thumb {
+  display: table-cell;
+}
+/* line 478, scss/objects/_blocks.scss */
+.bio .bio-thumb img {
+  height: 150px;
+  width: 150px;
+  border-radius: 75px;
+}
+/* line 484, scss/objects/_blocks.scss */
+.bio .bio-thumb h3 {
+  margin: 1em 0 0.5em 0;
+}
+@media all and (min-width: 29.75em) {
+  /* line 475, scss/objects/_blocks.scss */
+  .bio .bio-thumb {
+    vertical-align: top;
+  }
+}
+@media all and (min-width: 29.75em) {
+  /* line 494, scss/objects/_blocks.scss */
+  .bio .bio-textblock {
+    display: table-cell;
+    width: 50%;
+    padding: 0 1em;
+  }
+}
+
+/* Bold Bars */
+/* line 506, scss/objects/_blocks.scss */
+.primary-bar {
+  background-color: #13b2d4;
+  padding: 4em 0;
+}
+
+/* line 513, scss/objects/_blocks.scss */
+.gray-bar {
+  background-color: #353535;
+  padding: 4em 0;
+}
+
+/* line 520, scss/objects/_blocks.scss */
+.dark-bar {
+  background-color: #262626;
+  padding: 4em 0;
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
+  display: flex;
+  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+@media all and (max-width: 46.8em) {
+  /* line 520, scss/objects/_blocks.scss */
+  .dark-bar {
+    padding-top: 22px;
+  }
+}
+
+/* Screenshot Container */
+/* line 542, scss/objects/_blocks.scss */
+.screenshot-container {
+  background-color: #262626;
+  background-image: url("../images/texture-overlay.png");
+  background-size: cover;
+  background-position: top left;
+  background-repeat: no-repeat;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-bottom: 4em;
+  /*	align-items: center;
+  	padding: $pad-quart 0;
+    	padding-left: 10%;
+  	padding-right: 10%;	
+    	justify-content: center;
+    	display: flex;
+   	flex-direction: column;	
+  */
+  border-bottom: 1px solid #353535;
+}
+@media all and (max-width: 46.8em) {
+  /* line 542, scss/objects/_blocks.scss */
+  .screenshot-container {
+    padding-top: 22px;
+  }
+}
+
+/* line 566, scss/objects/_blocks.scss */
+.fake-browser-ui {
+  padding: 20px 0 0;
+  border-radius: 3px;
+  border: 1px solid #666666;
+  border-bottom: 2px solid #666666;
+  background: #666666;
+  position: relative;
+  line-height: 0;
+}
+@media all and (min-width: 89em) {
+  /* line 566, scss/objects/_blocks.scss */
+  .fake-browser-ui {
+    padding: 22px 0 0;
+  }
+}
+
+/* line 581, scss/objects/_blocks.scss */
+.fake-browser-ui .frame {
+  display: block;
+  height: 15px;
+  position: absolute;
+  top: 5px;
+  left: 1px;
+}
+
+/* line 589, scss/objects/_blocks.scss */
+.fake-browser-ui span {
+  height: 8px;
+  width: 8px;
+  border-radius: 8px;
+  background-color: gray;
+  border: 1px solid #999999;
+  float: left;
+  margin: 0 0 0 4px;
+}
+@media all and (min-width: 89em) {
+  /* line 589, scss/objects/_blocks.scss */
+  .fake-browser-ui span {
+    height: 12px;
+    width: 12px;
+    border-radius: 12px;
+  }
+}
+
+/* Stats Block */
+/* line 606, scss/objects/_blocks.scss */
+.stats-bar {
+  position: relative;
+  background-color: #353535;
+  background-image: url("../images/contribution_calendar.png");
+  background-position: -10px;
+  background-repeat: repeat;
+  padding: 4em 0 8em 0;
+}
+@media all and (min-width: 48em) {
+  /* line 606, scss/objects/_blocks.scss */
+  .stats-bar {
+    /*		padding-left: 10%;
+    		padding-right: 10%;
+    */
+  }
+}
+
+/*.rando-bg {
+	position: absolute;
+	overflow: hidden;
+	z-index: 0;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+		span {
+		margin-top: -10px;
+		}
+}*/
+/*
+*************************************
+we're working on it section - main containers are 
+now default flex-containers in _layout.scss - boooyah!
+*************************************
+*/
+/* line 643, scss/objects/_blocks.scss */
+.stats-label {
+  text-align: center;
+  font-size: 1.4375em;
+}
+
+/* line 648, scss/objects/_blocks.scss */
+.number_box {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 0 .15em;
+  font-size: 3.2em;
+  font-weight: 100;
+  letter-spacing: .03em;
+  color: #13b2d4;
+  text-align: center;
+  margin: 10px 0;
+}
+@media all and (min-width: 48em) {
+  /* line 648, scss/objects/_blocks.scss */
+  .number_box {
+    font-size: 4.5em;
+  }
+}
+@media all and (min-width: 66em) {
+  /* line 648, scss/objects/_blocks.scss */
+  .number_box {
+    font-size: 6em;
+  }
+}
+
+@media all and (min-width: 48em) {
+  /* line 669, scss/objects/_blocks.scss */
+  .github-box {
+    font-size: 1.0625em;
+  }
+}
+@media all and (min-width: 66em) {
+  /* line 669, scss/objects/_blocks.scss */
+  .github-box {
+    font-size: 1.0625em;
+  }
+}
+/* line 677, scss/objects/_blocks.scss */
+.github-box li {
+  height: 40px;
+  width: 330px;
+}
+/* line 678, scss/objects/_blocks.scss */
+.github-box .cat {
+  display: inline-block;
+  width: 26px;
+  height: 20px;
+  margin-bottom: -2px;
+  background: url(../images/github-icon.svg) right 2px no-repeat;
+  opacity: 0.5;
+}
+/* line 679, scss/objects/_blocks.scss */
+.github-box .path {
+  display: inline-block;
+  width: 75px;
+}
+/* line 680, scss/objects/_blocks.scss */
+.github-box .primary {
+  background-color: #13b2d4;
+  padding: 4px 8px;
+}
+/* line 681, scss/objects/_blocks.scss */
+.github-box .unavail {
+  background-color: gray;
+  padding: 4px 8px;
+}
+
+/*
+*************************************
+SNAPSHOT
+*************************************
+*/
+/* line 691, scss/objects/_blocks.scss */
+.snapshot-graph {
+  background: url(../images/snapshot_graph_bg.svg) no-repeat center;
+  background-size: cover;
+  text-align: center;
+  background-color: #000;
+  height: auto;
+  width: 100%;
+  padding: 60px 0;
+}
+
+/* line 700, scss/objects/_blocks.scss */
+.logo_lockup {
+  width: 50%;
+  margin: 0 auto;
+  padding-bottom: 30px;
+}
+
+/* 
+*************************************
+UI Block 
+*************************************
+*/
+/* line 2, scss/objects/_lists.scss */
+.inline-list li {
+  display: inline-block;
+}
+
+/* Social List */
+/* line 9, scss/objects/_lists.scss */
+.social-list li {
+  margin: 0 0.4rem 1em 0;
+}
+/* line 13, scss/objects/_lists.scss */
+.social-list a {
+  font-size: 1.6em;
+}
+
+/* Headline List */
+/* line 20, scss/objects/_lists.scss */
+.headline-list {
+  margin-bottom: 1em;
+}
+/* line 23, scss/objects/_lists.scss */
+.headline-list.flush {
+  margin: 0;
+}
+/* line 27, scss/objects/_lists.scss */
+.headline-list h4 {
+  font-weight: normal;
+}
+/* line 31, scss/objects/_lists.scss */
+.headline-list li {
+  padding: 0.25em 0;
+  border-top: 1px solid #dddddd;
+}
+
+/* Post List */
+/* line 39, scss/objects/_lists.scss */
+.post-list li {
+  margin-bottom: 1em;
+}
+
+/* Bullet List */
+/* line 45, scss/objects/_lists.scss */
+.bullet-list {
+  list-style: square;
+  margin: 0 0 1em 1.2em;
+  line-height: 1.3;
+}
+/* line 50, scss/objects/_lists.scss */
+.bullet-list li {
+  margin-bottom: 1em;
+}
+
+/* Text List */
+/* line 56, scss/objects/_lists.scss */
+.text-list {
+  margin: 0 0 1em;
+  line-height: 1.3;
+}
+/* line 60, scss/objects/_lists.scss */
+.text-list li {
+  margin-bottom: 1em;
+}
+
+/* line 1, scss/objects/_tooltip.scss */
+.tooltip-container {
+  display: inline-block;
+  position: relative;
+}
+/* line 6, scss/objects/_tooltip.scss */
+.tooltip-container:hover .tooltip {
+  display: block;
+}
+
+/* line 12, scss/objects/_tooltip.scss */
+.tooltip-link {
+  background: #f9f9f9;
+}
+
+/* line 16, scss/objects/_tooltip.scss */
+.tooltip {
+  display: none;
+  position: absolute;
+  top: 1.5em;
+  left: 0;
+  width: 18em;
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid gray;
+  box-shadow: 0.3em 0.3em 1em 0 rgba(0, 0, 0, 0.2);
+}
+/* line 27, scss/objects/_tooltip.scss */
+.tooltip h2 {
+  margin-top: 0;
+}
+@media all and (min-width: 24em) {
+  /* line 16, scss/objects/_tooltip.scss */
+  .tooltip {
+    width: 22em;
+  }
+}
+@media all and (min-width: 29.75em) {
+  /* line 16, scss/objects/_tooltip.scss */
+  .tooltip {
+    width: 27em;
+  }
+}
+@media all and (min-width: 39.8em) {
+  /* line 16, scss/objects/_tooltip.scss */
+  .tooltip {
+    width: 30em;
+  }
+}
+
+/* line 1, scss/objects/_accordion.scss */
+.accordion {
+  margin-bottom: 1em;
+}
+
+/* line 5, scss/objects/_accordion.scss */
+.acc-handle {
+  background: #131313;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: Georgia, Times, "Times New Roman", serif;
+  font-weight: bold;
+  display: block;
+  position: relative;
+  padding: 0.5em;
+  border-bottom: 1px solid #dddddd;
+}
+/* line 15, scss/objects/_accordion.scss */
+.acc-handle:after {
+  content: "+";
+  float: right;
+}
+/* line 20, scss/objects/_accordion.scss */
+.acc-handle:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background: #262626;
+}
+/* line 26, scss/objects/_accordion.scss */
+.acc-handle.active {
+  background: #262626;
+}
+/* line 29, scss/objects/_accordion.scss */
+.acc-handle.active:after {
+  content: "-";
+}
+
+/* line 1, scss/objects/_tabs.scss */
+.tabs {
+  overflow: hidden;
+}
+/* line 4, scss/objects/_tabs.scss */
+.tabs ul {
+  display: table;
+  width: 100%;
+}
+/* line 9, scss/objects/_tabs.scss */
+.tabs li {
+  display: table-cell;
+  text-align: center;
+  border-right: 1px solid #dddddd;
+}
+/* line 14, scss/objects/_tabs.scss */
+.tabs li:last-child {
+  border-right: 0;
+}
+/* line 19, scss/objects/_tabs.scss */
+.tabs a {
+  display: block;
+  padding: 0.5em;
+  background: gray;
+}
+/* line 24, scss/objects/_tabs.scss */
+.tabs a:hover, .tabs a:focus {
+  background: #dddddd;
+}
+/* line 28, scss/objects/_tabs.scss */
+.tabs a.active {
+  background: #262626;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* line 1, scss/objects/_sections.scss */
+.section {
+  margin: 0 0 1em;
+}
+
+/* line 5, scss/objects/_sections.scss */
+.section-title {
+  margin-bottom: 0.5em;
+}
+
+/* line 3, scss/objects/_article.scss */
+.article-header h1 {
+  font-size: 2.5em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* line 9, scss/objects/_article.scss */
+.byline {
+  font-size: 0.875em;
+  font-style: italic;
+  margin-bottom: 0.5em;
+}
+
+/* line 16, scss/objects/_article.scss */
+.social-share {
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+/* line 20, scss/objects/_article.scss */
+.social-share li {
+  float: left;
+  margin-right: 0.5em;
+}
+/* line 25, scss/objects/_article.scss */
+.social-share a {
+  background: #262626;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  padding: 0.5em;
+}
+/* line 31, scss/objects/_article.scss */
+.social-share a:hover {
+  background: gray;
+}
+
+/* line 2, scss/objects/_comments.scss */
+.comments li {
+  margin-bottom: 1em;
+}
+
+/* line 7, scss/objects/_comments.scss */
+.comment-container {
+  overflow: hidden;
+  margin-bottom: 1em;
+  list-style: none;
+}
+
+/* line 13, scss/objects/_comments.scss */
+.comment-meta {
+  float: left;
+  width: 6.5em;
+}
+/* line 17, scss/objects/_comments.scss */
+.comment-meta img {
+  display: block;
+  border: 1px solid #eeeeee;
+  margin-bottom: 0.5em;
+}
+
+/* line 24, scss/objects/_comments.scss */
+.comment-name {
+  font-size: 0.75em;
+}
+
+/* line 28, scss/objects/_comments.scss */
+.comment-text {
+  margin-left: 9em;
+}
+
+/*------------------------------------*\
+    $MESSAGING
+\*------------------------------------*/
+/* line 6, scss/objects/_messaging.scss */
+.alert {
+  text-align: center;
+  padding: 1em;
+  margin-bottom: 0.5em;
+  border: 1px solid gray;
+  background: #f9f9f9;
+}
+
+/* line 14, scss/objects/_messaging.scss */
+.alert-error {
+  color: red;
+  border-color: red;
+  background: #ffbebe;
+}
